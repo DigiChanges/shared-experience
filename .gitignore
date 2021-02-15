@@ -23,3 +23,7 @@ yarn-error.log*
 .idea
 yarn.lock
 package-lock.json
+
+dist
+
+digichanges-shared-experience-*
