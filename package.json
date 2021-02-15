@@ -1,0 +1,15 @@
+{
+  "name": "shared-experience",
+  "version": "1.0.0",
+  "description": "All shared packages for node experience",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Cameron Nokes",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.1.5"
+  }
+}
