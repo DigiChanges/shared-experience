@@ -1,12 +1,12 @@
 import {ICriteria, IPaginator} from "../Criteria";
 
-export interface IBaseRepository
+export interface IBaseRepository<T>
 {
-    save(element: any): Promise<any>;
-    update(element: any): Promise<any>;
-    getOne(id: string): Promise<any>;
+    save(element: T): Promise<T>;
+    update(element: T): Promise<T>;
+    getOne(id: string): Promise<T>;
     list(criteria: ICriteria): Promise<IPaginator>;
-    delete(id: any): Promise<any>;
+    delete(id: string): Promise<T>;
 }
 
 export interface ICacheRepository
@@ -21,9 +21,9 @@ export interface ICacheRepository
     cleanAll(): Promise<any>;
 }
 
-export interface ITokenRepository
+export interface ITokenRepository<T>
 {
-    save(element: any): Promise<any>;
-    getOne(id: string): Promise<any>;
-    update(element: any): Promise<any>
+    save(element: any): Promise<T>;
+    getOne(id: string): Promise<T>;
+    update(element: any): Promise<T>
 }
