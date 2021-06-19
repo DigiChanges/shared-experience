@@ -17,6 +17,7 @@ export interface ISort
 export interface IPagination
 {
      getLimit(): number;
+     getPath(): string;
      getOffset(): number;
      getCurrentUrl(): string;
      getNextUrl(): string;
@@ -34,7 +35,17 @@ export interface IPaginator
 {
     paginate(): Promise<any>;
     getTotal(): number;
-    getCurrentUrl(): string;
+    getPerPage(): number;
+    getCurrentPage(): number;
+    getLasPage(): number;
+    getFrom(): number;
+    getTo(): number;
+    getPath(): string;
+    getFirstUrl(): string;
+    getLastUrl(): string;
     getNextUrl(): string;
+    getPrevUrl(): string;
+    getCurrentUrl(): string;
     getExist(): boolean;
+    getMetadata(): {[key: string]: any};
 }
