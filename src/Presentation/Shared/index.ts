@@ -1,5 +1,5 @@
-import * as express from "express";
 import {IFilter, IPaginator, ISort} from "../../InterfacesAdapters";
+import QueryString from 'qs';
 
 export abstract class Transformer
 {
@@ -29,33 +29,36 @@ export abstract class Filter implements IFilter
 {
     private readonly filters: Map<string, any>;
 
-    constructor(request: express.Request)
+    constructor(query: QueryString.ParsedQs)
     {
-        this.filters = new Map<string, string>();
-        let queryFilters: any = request.query.hasOwnProperty('filter') ? request.query.filter : [];
-        let defaultFilters: any = this.getDefaultFilters();
-        let keys = this.getFields();
+        this.filters = new Map<string, any>();
+        const queryFilters: any = query.filter ?? [];
+        const defaultFilters: any = this.getDefaultFilters();
+        const keys = this.getFields();
 
-        defaultFilters.forEach((defaultFilter: any) => {
+        defaultFilters.forEach((defaultFilter: any) =>
+        {
             const defaultKey: string = Object.keys(defaultFilter)[0];
             const defaultValue: string = defaultFilter[defaultKey];
 
             this.filters.set(defaultKey, defaultValue);
         });
 
-        let newFilters = Object.keys(queryFilters).map((key: string) =>
+        const newFilters = Object.keys(queryFilters).map((key: string) =>
         {
-            const filter: any = request.query.filter;
+            const filter: Record<string, any> = query.filter as Record<string, any>;
 
             return {
                 [key]: filter[key]
             };
-        }).filter((value => {
+        }).filter((value =>
+        {
             const key = Object.keys(value)[0];
             return keys.includes(key) ? value : false;
         }));
 
-        newFilters.forEach((newFilter: any) => {
+        newFilters.forEach((newFilter: any) =>
+        {
             const defaultKey: string = Object.keys(newFilter)[0];
             const defaultValue: string = newFilter[defaultKey];
 
@@ -78,7 +81,7 @@ export abstract class Filter implements IFilter
         return this.filters.has(key);
     }
 
-     isEmpty(): boolean
+    isEmpty(): boolean
     {
         return this.filters.size === 0;
     }
@@ -88,41 +91,43 @@ export abstract class Filter implements IFilter
         return this.filters;
     }
 
-    abstract getFields(): any[];
-    abstract getDefaultFilters(): any;
+    abstract getFields(): string[];
+    abstract getDefaultFilters(): any[];
 }
 
 export abstract class Sort implements ISort
 {
     private readonly sorts: Map<string, string>;
 
-    constructor(request: express.Request)
+    constructor(query: QueryString.ParsedQs)
     {
         // TODO: Remove logic from constructor
         this.sorts = new Map<string, string>();
-        let sorts: any = request.query.hasOwnProperty('sort') ? request.query.sort : [];
-        let keys = this.getFields();
+        const sorts: any = query.sort ?? [];
+        const keys = this.getFields();
 
-        let newSorts = Object.keys(sorts).map((key: string) =>
+        const newSorts = Object.keys(sorts).map((key: string) =>
         {
-            const sort: any = request.query.sort;
+            const sort: any = query.sort;
 
             return {
                 [key]: sort[key]
             };
-        }).filter((value => {
+        }).filter((value =>
+        {
             const key = Object.keys(value)[0];
             return keys.includes(key) ? value : false;
         }));
 
-        newSorts.forEach((newSort: any) => {
+        newSorts.forEach((newSort: any) =>
+        {
             const defaultKey: string = Object.keys(newSort)[0];
             const defaultValue: string = newSort[defaultKey];
 
             this.sorts.set(defaultKey, defaultValue);
         });
 
-        let defaultSorts = this.getDefaultSorts();
+        const defaultSorts = this.getDefaultSorts();
 
         if (this.sorts.size === 0)
         {
