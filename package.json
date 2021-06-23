@@ -16,5 +16,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@types/qs": "^6.9.6",
+    "qs": "^6.10.1"
   }
 }

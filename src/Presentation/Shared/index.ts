@@ -29,7 +29,7 @@ export abstract class Filter implements IFilter
 {
     private readonly filters: Map<string, any>;
 
-    constructor(query: QueryString.ParsedQs)
+    protected constructor(query: QueryString.ParsedQs)
     {
         this.filters = new Map<string, any>();
         const queryFilters: any = query.filter ?? [];
@@ -99,7 +99,7 @@ export abstract class Sort implements ISort
 {
     private readonly sorts: Map<string, string>;
 
-    constructor(query: QueryString.ParsedQs)
+    protected constructor(query: QueryString.ParsedQs)
     {
         // TODO: Remove logic from constructor
         this.sorts = new Map<string, string>();
