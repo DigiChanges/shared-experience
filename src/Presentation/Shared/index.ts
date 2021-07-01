@@ -1,5 +1,5 @@
 import {IFilter, IPaginator, ISort} from "../../InterfacesAdapters";
-import QueryString from 'qs';
+import {ParsedQs} from 'qs';
 
 export abstract class Transformer
 {
@@ -22,6 +22,18 @@ export abstract class Transformer
 
         return result;
     }
+
+    validate<T = any>(value: any, transformer: Transformer | null = null, returnNull = true): T | null | undefined
+    {
+        const valid = !!(value);
+
+        if (transformer)
+        {
+            return valid ? transformer.handle(value) : (returnNull ? null : undefined);
+        }
+
+        return valid ? value : (returnNull ? null : undefined);
+    }
 }
 
 
@@ -29,7 +41,7 @@ export abstract class Filter implements IFilter
 {
     private readonly filters: Map<string, any>;
 
-    protected constructor(query: QueryString.ParsedQs)
+    protected constructor(query: ParsedQs)
     {
         this.filters = new Map<string, any>();
         const queryFilters: any = query.filter ?? [];
@@ -99,7 +111,7 @@ export abstract class Sort implements ISort
 {
     private readonly sorts: Map<string, string>;
 
-    protected constructor(query: QueryString.ParsedQs)
+    protected constructor(query: ParsedQs)
     {
         // TODO: Remove logic from constructor
         this.sorts = new Map<string, string>();
@@ -156,8 +168,17 @@ export class PaginatorTransformer extends Transformer
     {
         return {
             total: paginator.getTotal(),
-            currentUrl: paginator.getCurrentUrl(),
-            nextUrl: paginator.getNextUrl()
+            perPage: paginator.getPerPage(),
+            currentPage: paginator.getCurrentPage(),
+            lastPage: paginator.getLasPage(),
+            from: paginator.getFrom(),
+            to: paginator.getTo(),
+            path: paginator.getPath(),
+            firstUrl: paginator.getFirstUrl(),
+            lastUrl: paginator.getLastUrl(),
+            nextUrl: paginator.getNextUrl(),
+            prevUrl: paginator.getPrevUrl(),
+            currentUrl: paginator.getCurrentUrl()
         };
     }
 }
