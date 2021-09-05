@@ -48,4 +48,6 @@ export interface IPaginator
     getCurrentUrl(): string;
     getExist(): boolean;
     getMetadata(): Record<string, any>;
+    getOffset(): number;
+    getLimit(): number;
 }
