@@ -47,5 +47,7 @@ export interface IPaginator
     getPrevUrl(): string;
     getCurrentUrl(): string;
     getExist(): boolean;
-    getMetadata(): {[key: string]: any};
+    getMetadata(): Record<string, any>;
+    getOffset(): number;
+    getLimit(): number;
 }
