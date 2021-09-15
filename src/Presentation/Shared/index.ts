@@ -41,7 +41,7 @@ export abstract class Filter implements IFilter
 {
     private readonly filters: Map<string, any>;
 
-    protected constructor(query: ParsedQs)
+    constructor(query: ParsedQs)
     {
         this.filters = new Map<string, any>();
         const queryFilters: any = query.filter ?? [];
@@ -111,7 +111,7 @@ export abstract class Sort implements ISort
 {
     private readonly sorts: Map<string, string>;
 
-    protected constructor(query: ParsedQs)
+    constructor(query: ParsedQs)
     {
         // TODO: Remove logic from constructor
         this.sorts = new Map<string, string>();
