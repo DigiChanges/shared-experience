@@ -1,13 +1,15 @@
-import {IHttpStatusCode} from "../../InterfacesAdapters";
+import {IErrorMessage, IHttpStatusCode} from "../../InterfacesAdapters";
 
 export class ErrorException extends Error
 {
-    private metadata: Record<string, any>;
+    public metadata: Record<string, any>;
+    public errorKey: string | null;
 
-    constructor(message: string, name = ErrorException.name, metadata: Record<string, any> = {})
+    constructor(errorMessage: IErrorMessage , name = ErrorException.name, metadata: Record<string, any> = {})
     {
         super();
-        this.message = message;
+        this.message = errorMessage.message;
+        this.errorKey = errorMessage?.key ?? null
         this.name = name;
         this.metadata = metadata;
     }
