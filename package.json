@@ -1,6 +1,6 @@
 {
   "name": "@digichanges/shared-experience",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "All shared packages for node experience",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.14.39",
-    "typescript": "^4.2.4"
+    "typescript": "^4.4.4"
   },
   "publishConfig": {
     "access": "public"
