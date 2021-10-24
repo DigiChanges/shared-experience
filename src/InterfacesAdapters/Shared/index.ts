@@ -48,5 +48,5 @@ export interface IMail
 export interface IErrorMessage
 {
     message: string;
-    key?: string;
+    errorCode?: string;
 }
