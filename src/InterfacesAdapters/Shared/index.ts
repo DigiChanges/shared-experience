@@ -44,3 +44,9 @@ export interface IMail
     getHtml(): string;
     sendMail(): Promise<any>;
 }
+
+export interface IErrorMessage
+{
+    message: string;
+    key?: string;
+}
