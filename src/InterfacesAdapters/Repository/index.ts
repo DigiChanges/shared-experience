@@ -1,11 +1,9 @@
-import {ICriteria, IPaginator} from "../Criteria";
 
 export interface IBaseRepository<T>
 {
     save(element: T): Promise<T>;
     update(element: T): Promise<T>;
     getOne(id: string): Promise<T>;
-    list(criteria: ICriteria): Promise<IPaginator>;
     delete(id: string): Promise<T>;
 }
 

@@ -18,6 +18,7 @@ export interface IFilesystem
     presignedGetObject(objectName: string, expiry?: number, respHeaders?: { [key: string]: any; }): Promise<string>;
     presignedPutObject(objectName: string, expiry?: number): Promise<string>;
     createBucket(bucketName: string, region?: string): Promise<void>;
+    removeObjects(objectName: string): Promise<void>
     setBucketPolicy(bucketPolicy: string, bucketName?: string): Promise<void>;
     getClient(): any;
 }
