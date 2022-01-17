@@ -6,14 +6,14 @@ export abstract class Transformer
     abstract transform(data: any): any;
     handle(data: any): any
     {
-        let result = null;
+        let result: any[] | any = [];
 
-        if (data instanceof Array)
+        if (typeof data[Symbol.iterator] === 'function')
         {
-            result = data.map((element: any) =>
+            for (const element of data)
             {
-                return this.transform(element);
-            });
+                result.push(this.transform(element));
+            }
         }
         else
         {

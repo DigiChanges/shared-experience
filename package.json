@@ -1,6 +1,6 @@
 {
   "name": "@digichanges/shared-experience",
-  "version": "0.6.2",
+  "version": "0.7.1",
   "description": "All shared packages for node experience",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,7 @@
     "build": "tsc",
     "prepublish": "tsc"
   },
-  "author": "Nathan Russo",
+  "author": "Nathan Russo & Roxnny Barrios",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.14.39",
