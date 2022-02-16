@@ -3,33 +3,33 @@ import {ParsedQs} from 'qs';
 
 export abstract class Transformer
 {
-    abstract transform(data: any): any;
-    handle(data: any): any
+    abstract transform(data: any): Promise<any>;
+    async handle(data: any): Promise<any>
     {
         let result: any[] | any = [];
 
         if (typeof data[Symbol.iterator] === 'function')
         {
-            for (const element of data)
+            for await (const element of data)
             {
-                result.push(this.transform(element));
+                result.push(await this.transform(element));
             }
         }
         else
         {
-            result = this.transform(data);
+            result = await this.transform(data);
         }
 
         return result;
     }
 
-    validate<T = any>(value: any, transformer: Transformer | null = null, returnNull = true): T | null | undefined
+    async validate<T = any>(value: any, transformer: Transformer | null = null, returnNull = true): Promise<T | null | undefined>
     {
         const valid = !!(value);
 
         if (transformer)
         {
-            return valid ? transformer.handle(value) : (returnNull ? null : undefined);
+            return valid ? await transformer.handle(value) : (returnNull ? null : undefined);
         }
 
         return valid ? value : (returnNull ? null : undefined);
@@ -164,7 +164,7 @@ export abstract class Sort implements ISort
 
 export class PaginatorTransformer extends Transformer
 {
-    public transform(paginator: IPaginator)
+    public async transform(paginator: IPaginator)
     {
         return {
             total: paginator.getTotal(),
