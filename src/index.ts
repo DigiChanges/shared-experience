@@ -1,4 +1,4 @@
-export * from './Application';
+export * from './Domain';
+export * from './Main';
 export * from './Infrastructure';
-export * from './InterfacesAdapters';
 export * from './Presentation';
