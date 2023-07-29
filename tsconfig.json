@@ -6,10 +6,20 @@
     "declaration": true,
     "outDir": "lib",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "types": [
+      "node",
+      "jest"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
   },
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "lib"
   ]
 }
