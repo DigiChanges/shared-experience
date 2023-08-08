@@ -1,6 +1,6 @@
 {
   "name": "@digichanges/shared-experience",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "All shared packages for node experience",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
