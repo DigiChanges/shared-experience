@@ -2,7 +2,10 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
-    "lib": ["ES2022"],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
     "declaration": true,
     "outDir": "lib",
     "strict": true,

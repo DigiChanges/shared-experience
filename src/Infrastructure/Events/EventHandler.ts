@@ -1,6 +1,12 @@
 import { Subject } from 'rxjs';
 import { IEvent } from './IEvent';
 
+type SubscribeEventProps =
+{
+    eventName: string;
+    args: Record<string, unknown>;
+}
+
 export class EventHandler
 {
     private static instance: EventHandler;
@@ -11,6 +17,27 @@ export class EventHandler
     {
         this.events = new Map<string, (args: any) => Promise<void>>();
         this.eventSubject = new Subject<any>();
+
+        this.eventSubject.subscribe((event: SubscribeEventProps) =>
+        {
+            const { eventName, args } = event;
+            const eventHandler = this.events.get(eventName);
+
+            if (eventHandler)
+            {
+                void (async() =>
+                {
+                    try
+                    {
+                        eventHandler(args).then()
+                    }
+                    catch (error)
+                    {
+                        console.log(error);
+                    }
+                })();
+            }
+        });
     }
 
     static getInstance(): EventHandler
@@ -30,28 +57,11 @@ export class EventHandler
 
     public setEvent(_event: IEvent)
     {
+        if (this.events.has(_event.name)) {
+            return;
+        }
+
         this.events.set(_event.name, _event.handle);
-
-        this.eventSubject.subscribe((event) =>
-        {
-            const { eventName, args } = event;
-            const eventHandler = this.events.get(eventName);
-
-            if (eventHandler)
-            {
-                void (async() =>
-                {
-                    try
-                    {
-                        await eventHandler(args);
-                    }
-                    catch (error)
-                    {
-                        await console.log(error);
-                    }
-                })();
-            }
-        });
     }
 
     public async removeListeners()
