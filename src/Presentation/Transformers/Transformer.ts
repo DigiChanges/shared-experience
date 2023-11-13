@@ -1,5 +1,5 @@
 
-export abstract class Transformer<T, P>
+export abstract class Transformer<T = unknown, P = unknown>
 {
     abstract transform(data: T): Promise<P>;
 
