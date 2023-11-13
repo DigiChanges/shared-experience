@@ -1,12 +1,13 @@
 
-export abstract class Transformer
+export abstract class Transformer<T, P>
 {
-    abstract transform(data: any): Promise<any>;
-    async handle(data: any): Promise<any>
-    {
-        let result: any[] | any = [];
+    abstract transform(data: T): Promise<P>;
 
-        if (typeof data[Symbol.iterator] === 'function')
+    async handle(data: T | T[]): Promise<P | P[]>
+    {
+        let result: P[] | P = [];
+
+        if (Array.isArray(data))
         {
             for await (const element of data)
             {

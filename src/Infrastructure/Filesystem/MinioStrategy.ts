@@ -47,12 +47,12 @@ export class MinioStrategy implements IFilesystem
 
     async createBucket(bucketPrivate: string, region?: string): Promise<void>
     {
-        return await this.#filesystem.makeBucket(bucketPrivate || this.#privateBucket, region || this.#region);
+        return await this.#filesystem.makeBucket(bucketPrivate ?? this.#privateBucket, region ?? this.#region);
     }
 
     async setBucketPolicy(bucketPolicy: string, bucketPrivate?: string): Promise<void>
     {
-        return await this.#filesystem.setBucketPolicy(bucketPrivate || this.#privateBucket, bucketPolicy);
+        return await this.#filesystem.setBucketPolicy(bucketPrivate ?? this.#privateBucket, bucketPolicy);
     }
 
     async uploadFile(object: FileVersionPayload, path: string)

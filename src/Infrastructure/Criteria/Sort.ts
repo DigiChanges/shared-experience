@@ -7,7 +7,6 @@ export abstract class Sort implements ISort
 
     constructor(query: ParsedQs)
     {
-        // TODO: Remove logic from constructor
         this.sorts = new Map<string, string>();
         const sorts: any = query.sort ?? [];
         const keys = this.getFields();

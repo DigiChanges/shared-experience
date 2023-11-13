@@ -16,52 +16,52 @@ export class FilesystemMockStrategy implements IFilesystem
 
     async presignedGetObject(object: FileVersionPayload, expiry: number, respHeaders?: { [key: string]: any; }): Promise<string>
     {
-        return new Promise<string>((resolve) => resolve('success'));
+        return Promise.resolve('success');
     }
 
     async presignedPutObject(objectName: string, expiry: number): Promise<string>
     {
-        return new Promise<string>((resolve) => resolve('success'));
+        return Promise.resolve('success');
     }
 
     async createBucket(bucketName: string, region?: string): Promise<void>
     {
-        return new Promise<void>((resolve) => resolve);
+        return Promise.resolve();
     }
 
     async setBucketPolicy(bucketPolicy: string, bucketName?: string): Promise<void>
     {
-        return new Promise<void>((resolve) => resolve);
+        return Promise.resolve();
     }
 
     async uploadFile(object: FileVersionPayload, path: string): Promise<string>
     {
-        return new Promise<string>((resolve) => resolve('success'));
+        return Promise.resolve('success');
     }
 
     async uploadFileByBuffer(object: FileVersionPayload, base64Data: string)
     {
-        return new Promise<string>((resolve) => resolve('success'));
+        return Promise.resolve('success');
     }
 
     async downloadFile(object: FileVersionPayload): Promise<string>
     {
-        return new Promise<string>((resolve) => resolve('success'));
+        return Promise.resolve('success');
     }
 
     async downloadStreamFile(object: FileVersionPayload): Promise<internal.Readable>
     {
-        return new Promise<internal.Readable>((resolve) => resolve(new internal.Readable()));
+        return Promise.resolve(new internal.Readable());
     }
 
     async listObjects(payload: ListObjectsPayload)
     {
-        return new Promise((resolve) => resolve('success'));
+        return Promise.resolve('success');
     }
 
     async removeObjects(object: FileVersionPayload): Promise<void>
     {
-        return new Promise<void>((resolve) => resolve);
+        return Promise.resolve();
     }
 
     getClient(): any

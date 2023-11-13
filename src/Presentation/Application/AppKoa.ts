@@ -11,14 +11,12 @@ export class AppKoa implements IApp
 {
     public port?: number;
     #app: Koa;
-    #config: IAppConfig;
     #server: Server | undefined;
 
     constructor(config: IAppConfig)
     {
         this.port = config.serverPort || 8090;
         this.#app = koaQs(new Koa());
-        this.#config = config;
         this.#app.proxy = config.proxy;
     }
 
