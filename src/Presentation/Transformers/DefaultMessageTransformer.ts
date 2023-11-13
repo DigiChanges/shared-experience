@@ -3,7 +3,7 @@ import { Transformer } from './Transformer';
 import { IDefaultMessageTransformer } from './IDefaultMessageTransformer';
 import { ResponseMessageEnum } from '../Enum';
 
-export class DefaultMessageTransformer<T extends Base> extends Transformer
+export class DefaultMessageTransformer<T extends Base> extends Transformer<T, IDefaultMessageTransformer>
 {
     readonly #typeResponse: string;
 
